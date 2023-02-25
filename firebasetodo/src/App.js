@@ -45,8 +45,8 @@ function App() {
       .catch(err => console.error(err))
   }
 
-  const deleteTodo = (id) => {
-    fetch(`https://[YOUR_APPID].firebasedatabase.app/items/${id}.json`,
+  function deleteTodo(id) {
+    fetch(`https://todolist-react-af882-default-rtdb.europe-west1.firebasedatabase.app/items/${id}.json`,
       {
         method: 'DELETE',
       })
@@ -55,11 +55,13 @@ function App() {
   }
   const rowData = todos
 
+
+
   const columnDefs = [
     { headerName: 'Description', field: "description" },
     { headerName: 'Date', field: "date" },
     { headerName: 'Priority', field: "priority" },
-    { headerName: '', field: 'id', width: 90, cellRenderer: params => <IconButton> <DeleteIcon /></IconButton> }
+    { headerName: '', field: 'id', cellRenderer: params => <IconButton onClick={() => deleteTodo(params.value)} size="small" color="error"><DeleteIcon /></IconButton> }
   ]
 
 
@@ -73,10 +75,11 @@ function App() {
         </Toolbar>
       </AppBar>
       <AddTodo addTodo={addTodo} />
-      <div className="ag-theme-material" style={{ height: 600, width: 900, margin: 'auto' }}>
+      <div className="ag-theme-material" style={{ height: 600, width: 1100, margin: 'auto' }}>
         <AgGridReact
           rowData={rowData}
-          columnDefs={columnDefs}>
+          columnDefs={columnDefs}
+        >
         </AgGridReact>
       </div>
 
