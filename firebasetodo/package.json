@@ -1,7 +1,7 @@
 {
   "name": "firebasetodo",
   "version": "0.1.0",
-  "homepage": "https://Akukoskela.github.io/todolistreact",
+  "homepage": "https://Akukoskela.github.io/myprojectnew",
   "private": true,
   "dependencies": {
     "@ag-grid-community/all-modules": "^27.3.0",

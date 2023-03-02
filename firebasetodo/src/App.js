@@ -4,6 +4,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import AddBook from './AddBook';
+import ClearBooks from './ClearBooks';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -25,7 +26,6 @@ function App() {
       .then(data => addKeys(data))
       .then(data => setBooks(Object.values(data)))
       .catch(err => console.error(err))
-
   }
 
   // Add keys to the todo objects
@@ -48,6 +48,15 @@ function App() {
 
   function deleteBook(id) {
     fetch(`https://bookstore-react-79d15-default-rtdb.europe-west1.firebasedatabase.app/books/${id}.json`,
+      {
+        method: 'DELETE',
+      })
+      .then(response => fetchItems())
+      .catch(err => console.error(err))
+  }
+
+  function deleteAllBooks() {
+    fetch('https://bookstore-react-79d15-default-rtdb.europe-west1.firebasedatabase.app/books.json',
       {
         method: 'DELETE',
       })
@@ -77,13 +86,23 @@ function App() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <AddBook addBook={addBook} />
+
+      <div className='napit'>
+        <div className='nappi1'>
+          <AddBook addBook={addBook} />
+        </div>
+        <div>
+          <button onClick={deleteAllBooks}>Clear all</button>
+        </div>
+      </div>
+
       <div className="ag-theme-material" style={{ height: 600, width: 1200, margin: 'auto' }}>
         <AgGridReact
           rowData={rowData}
           columnDefs={columnDefs}
         >
         </AgGridReact>
+
       </div>
 
     </div>
